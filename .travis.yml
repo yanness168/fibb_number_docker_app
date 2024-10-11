@@ -1,0 +1,16 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t yannessfibb/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run yannessfibb/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t yannessfibb/multi-client ./client
+  - docker build -t yannessfibb/multi-nginx ./nginx
+  - docker build -t yannessfibb/nulti-server ./server
+  - docker build -t yannessfibb/multi-worker ./worker
