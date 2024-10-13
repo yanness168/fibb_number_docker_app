@@ -12,7 +12,10 @@ script:
 after_success:
   - docker build -t yannessfibb/multi-client ./client
   - docker build -t yannessfibb/multi-nginx ./nginx
-  - docker build -t yannessfibb/nulti-server ./server
+  - docker build -t yannessfibb/multi-server ./server
   - docker build -t yannessfibb/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push yannessfibb/multi-client yannessfibb/multi-nginx yannessfibb/nulti-server yannessfibb/multi-worker
+  - docker push yannessfibb/multi-client 
+  - docker push yannessfibb/multi-nginx 
+  - docker push yannessfibb/multi-server 
+  - docker push yannessfibb/multi-worker
