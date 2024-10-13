@@ -7,10 +7,12 @@ before_install:
   - docker build -t yannessfibb/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-   - docker run -e CI=true yannessfibb/react-test npm test
+  - docker run -e CI=true yannessfibb/react-test npm test
 
 after_success:
   - docker build -t yannessfibb/multi-client ./client
   - docker build -t yannessfibb/multi-nginx ./nginx
   - docker build -t yannessfibb/nulti-server ./server
   - docker build -t yannessfibb/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push yannessfibb/multi-client yannessfibb/multi-nginx yannessfibb/nulti-server yannessfibb/multi-worker
