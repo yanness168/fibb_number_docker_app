@@ -10,12 +10,12 @@ script:
   - docker run -e CI=true yannessfibb/react-test npm test
 
 after_success:
-  - docker build -t yannessfibb/multi-client ./client
-  - docker build -t yannessfibb/multi-nginx ./nginx
-  - docker build -t yannessfibb/multi-server ./server
-  - docker build -t yannessfibb/multi-worker ./worker
+  - docker build -t yanness687/multi-client ./client
+  - docker build -t yanness687/multi-nginx ./nginx
+  - docker build -t yanness687/multi-server ./server
+  - docker build -t yanness687/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push yannessfibb/multi-client 
-  - docker push yannessfibb/multi-nginx 
-  - docker push yannessfibb/multi-server 
-  - docker push yannessfibb/multi-worker
+  - docker push yanness687/multi-client 
+  - docker push yanness687/multi-nginx 
+  - docker push yanness687/multi-server 
+  - docker push yanness687/multi-worker
